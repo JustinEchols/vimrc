@@ -77,7 +77,8 @@ set wildmenu
 "Use * to make it fuzzy
 
 "Ensure the buffer for building code opens in a new view
-set switchbuf=useopen,vsplit
+"set switchbuf=useopen,vsplit
+set switchbuf=useopen
  
 "error message format
 " Microsoft MSBuild
@@ -146,6 +147,17 @@ autocmd BufWritePre,FileWritePre *.py exe "3," . 11 . "g/Last Modified: /s/Last 
 " Jump back to cursor position using mark
 autocmd BufWritePost,FileWritePost *.py exe "normal `a"
 
+
+function! s:header_gates()
+	let gatename = substitute(toupper(expand("%:t")), "\\.", "_", "g")
+	execute "normal! i#if !defined(" . gatename . ")"
+	execute "normal! o#define " . gatename
+	execute "normal! Go#endif"
+	normal! kk
+	normal! o
+endfunction
+
+autocmd BufNewFile *.h call <SID>header_gates()
 
 
 "--------------------------------------Latex-----------------------------------------------
