@@ -167,13 +167,13 @@ let b:tex_flavor='pdflatex'
 let g:Tex_ViewRule_pdf='mupdf'
 let g:Tex_DefaultTargetFormat='pdf'
 let g:Tex_FormatDependency_dvi='dvi,ps,pdf'
-let g:Tex_CompileRule_dvi='latex --interaction=nonstopmode $*'
+let g:Tex_CompileRule_dvi='latex --interaction=nonstopmode$*'
 let g:Tex_CompileRule_ps='ps2pdf $*'
-let g:Tex_CompileRule_dvi = 'latex --interaction=nonstopmode $*'
+let g:Tex_CompileRule_dvi = 'latex --interaction=nonstopmode$*'
 
 function! LatexFileBuild() 
 	"Tried using batch file but does not work ?
-	set makeprg=pdflatex\ -file-line-error\ -synctex=1\ -interaction=batchmode\ -shell-escape\ %
+	set makeprg=pdflatex\ -file-line-error\ -synctex=1\ -interaction=nonstopmode\ -shell-escape\ %
 	silent make
 	copen
 	echo 'Build Complete'
