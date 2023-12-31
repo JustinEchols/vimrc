@@ -147,7 +147,6 @@ autocmd BufWritePre,FileWritePre *.py exe "3," . 11 . "g/Last Modified: /s/Last 
 " Jump back to cursor position using mark
 autocmd BufWritePost,FileWritePost *.py exe "normal `a"
 
-
 function! s:header_gates()
 	let gatename = substitute(toupper(expand("%:t")), "\\.", "_", "g")
 	execute "normal! i#if !defined(" . gatename . ")"
@@ -174,7 +173,7 @@ let g:Tex_CompileRule_dvi = 'latex --interaction=nonstopmode $*'
 
 function! LatexFileBuild() 
 	"Tried using batch file but does not work ?
-	set makeprg=pdflatex\ -file-line-error\ -synctex=1\ -interaction=nonstopmode\ -shell-escape\ %
+	set makeprg=pdflatex\ -file-line-error\ -synctex=1\ -interaction=batchmode\ -shell-escape\ %
 	silent make
 	copen
 	echo 'Build Complete'
@@ -287,6 +286,3 @@ set efm+=%E!\ LaTeX\ %trror:\ %m,
 			\%+Q)%r,
 			\%+Q%*[^()])%r,
 			\%+Q[%\\d%*[^()])%r
-
-
-
